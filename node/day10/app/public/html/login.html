@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      p {
+        color: red;
+        font-size:20px;
+        display:none;
+      }
+    </style>
+  </head>
+  <body>
+    <p id="deng">登录失败!</p>
+    <p id="cuo">用户名或者密码不对</p>
+    name: <input type="text" id="username"> <br>
+    passwd: <input type="password" id="passwd"> <br>
+    <button  id="btn">登录</button>
+    <script src="/js/jquery.min.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      $(function (){
+        $('#btn').click(function(){
+          var name = $('#username').val();
+          var passwd = $('#passwd').val();
+
+
+          $.ajax({
+            url:"/login",
+            method:"post",
+            data: {
+              name:name,
+              passwd:passwd
+            }
+          }).fail(function(jqXHR,status,error){
+             $('#deng').css("display","block");
+          }).done(function(data,status,jqXHR){
+            if(data.login === false){
+              $('#cuo').css("display","block");
+            }else{
+              window.location = "http://" + location.hostname + ":" + location.port + data.adminUrl;
+            }
+          })
+        });
+      })
+    </script>
+  </body>
+</html>

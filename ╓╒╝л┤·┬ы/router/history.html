@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>history操作历史记录</title>
+  </head>
+  <body>
+
+    <script type="text/javascript">
+
+
+    //后退，前进 触发该事件
+    window.onpopstate = function (event) {
+      console.log(event.state);
+
+      //event.state 就是当前路由对应的值,其实该历史添加时的第一个参数 {page: xxx}
+    }
+
+    //pushState添加历史记录
+     history.pushState({page: 1}, '', '/one');
+     history.pushState({page: 2}, '', '/two');
+     history.pushState({page: 3}, '', '/three');
+     // history.pushState({page: 4}, '', '/four');
+
+
+     //替换上一个路由，就是上一个路由没有了
+     history.replaceState({page: 4}, '', '/four');
+
+
+     /*
+     前端路由，默认是不允许用户直接在浏览器中输入url，否则就挂了(因为直接输入是发送的后端路由，后端没有处理该路由，那么就404错误了)
+     */
+
+    </script>
+
+  </body>
+</html>
